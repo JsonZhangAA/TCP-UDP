@@ -29,6 +29,7 @@ class Socket
         void Read(char * buf,int len);
         void Write(char * buf,int len);
         void Accept();
+        void Setsockopt();
         int get_return_fd()
         {
             return return_fd;

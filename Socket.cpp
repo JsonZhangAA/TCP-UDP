@@ -73,3 +73,13 @@ void Socket::Write(char * buf,int len)
 
     }
 }
+
+void Socket::Setsockopt()
+{
+    int yes=1;
+    if (setsockopt(socket_fd, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes)))
+    {
+        perror("setsockopt");
+        return;
+    }
+}

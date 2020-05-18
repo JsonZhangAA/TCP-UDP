@@ -9,13 +9,8 @@ int createSocket(int port)
 {
     Socket * tsocket=new Socket(true,port);
     
-    int yes = 1;
     //打开了地址复用功能
-    if (setsockopt(tsocket->get_socket_fd(), SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(yes)))
-    {
-        perror("setsockopt");
-        exit(1);
-    }
+    tsocket->Setsockopt();
     
     tsocket->Bind();
 
