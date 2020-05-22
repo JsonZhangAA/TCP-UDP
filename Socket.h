@@ -26,8 +26,12 @@ class Socket
         void Bind();
         void Listen();
         void Connect();
-        void Read(char * buf,int len);
-        void Write(char * buf,int len);
+        int Read(void * buf,int len);
+        //ssize_t nr = ::recvfrom(sock.fd(), &message, sizeof message, 0, &peerAddr, &addrLen);
+        int Recvfrom(void * buf,int len,struct sockaddr_in & peerAddr);
+        //sendto(sock.fd(), &message, sizeof message, 0, &peerAddr, addrLen);
+        int Sendto(const void * buf, int len,struct sockaddr_in & addr);
+        int Write(const void * buf,int len);
         void Accept();
         void Setsockopt();
         int get_return_fd()
@@ -37,6 +41,10 @@ class Socket
         int get_socket_fd()
         {
             return socket_fd;
+        }
+        struct sockaddr_in get_addr()
+        {
+            return addr;
         }
     private:
         int socket_fd,return_fd;

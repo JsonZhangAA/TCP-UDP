@@ -8,7 +8,7 @@ Socket::Socket(bool flag,int port)
     }
     else
     {
-        socket_fd=socket(AF_INET, SOCK_DGRAM | SOCK_CLOEXEC, IPPROTO_UDP);
+        socket_fd=socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     }
     assert(socket_fd>=0);
     memset(&addr,0,sizeof(addr));
@@ -38,6 +38,7 @@ void Socket::Listen()
 
 void Socket::Connect()
 {
+    printf("socket_fd: %d\n",socket_fd);
     if(connect(socket_fd,(struct sockaddr *)(&addr),sizeof(addr)))
     {
         printf("connect failed\n");
@@ -58,20 +59,30 @@ void Socket::Accept()
     }
 }
 
-void Socket::Read(char * buf, int len)
+int Socket::Read(void * buf, int len)
 {
-    if(read(socket_fd,buf,len))
-    {
-
-    }
+    //printf("waiting read sockfd: %d\n",socket_fd);
+    return read(socket_fd,buf,len);
+}
+//ssize_t nr = ::recvfrom(sock.fd(), &message, sizeof message, 0, &peerAddr, &addrLen);
+int Socket::Recvfrom(void * buf, int len,struct sockaddr_in & peerAddr)
+{
+    //struct sockaddr peerAddr;
+    bzero(&peerAddr, sizeof peerAddr);
+    socklen_t addrLen = sizeof(peerAddr);
+    return recvfrom(socket_fd,buf,len,0,(struct sockaddr *)&peerAddr,&addrLen);
 }
 
-void Socket::Write(char * buf,int len)
+int Socket::Write(const void * buf,int len)
 {
-    if(write(socket_fd,buf,len))
-    {
-
-    }
+    //printf("writing sockfd: %d\n",socket_fd);
+    return write(socket_fd,buf,len);
+}
+//sendto(sock.fd(), &message, sizeof message, 0, &peerAddr, addrLen);
+int Socket::Sendto(const void * buf,int len,struct sockaddr_in & addr)
+{
+    socklen_t addrLen = sizeof(addr);
+    return sendto(socket_fd, buf, len,0,(struct sockaddr *)&addr,addrLen);
 }
 
 void Socket::Setsockopt()
