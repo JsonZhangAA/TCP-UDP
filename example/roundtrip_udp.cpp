@@ -22,14 +22,11 @@ void server(int port)
     while(true)
     {
         struct message msg;
-        //::usleep(2000*1000);
-        //int nw=ssocket->Read(&msg,sizeof(msg));
         struct sockaddr_in  addr;
         int nw=ssocket->Recvfrom(&msg,sizeof(msg),addr);
         if(nw!=-1)
             printf("recv sockfd: %d, nw:%d done\n",ssocket->get_socket_fd(),nw);
         msg.response=clock();
-        //nw=ssocket->Write(&msg,sizeof(msg));
         nw=ssocket->Sendto(&msg,sizeof(msg),addr);
         if(nw!=-1)
             printf("send sockfd: %d,nw:%d,msg.request:%jd, msg.response:%jd done\n",ssocket->get_socket_fd(),nw,msg.request,msg.response);
