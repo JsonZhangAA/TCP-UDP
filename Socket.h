@@ -13,6 +13,11 @@ read、write
 #include <arpa/inet.h>
 #include <assert.h>
 #include <stdio.h>
+//#include <sys/types.h> 
+#include <signal.h> //for 信号相关的函数
+#include <sys/wait.h>//for watipid
+
+typedef void Sigfunc(int);
 
 class Socket
 {
@@ -26,13 +31,13 @@ class Socket
         void Bind();
         void Listen();
         void Connect();
-        int Read(void * buf,int len);
+        int Read(int fd,void * buf,int len);
         //ssize_t nr = ::recvfrom(sock.fd(), &message, sizeof message, 0, &peerAddr, &addrLen);
         int Recvfrom(void * buf,int len,struct sockaddr_in & peerAddr);
         //sendto(sock.fd(), &message, sizeof message, 0, &peerAddr, addrLen);
         int Sendto(const void * buf, int len,struct sockaddr_in & addr);
-        int Write(const void * buf,int len);
-        void Accept();
+        int Write(int fd,const void * buf,int len);
+        int Accept();
         void Setsockopt();
         int get_return_fd()
         {

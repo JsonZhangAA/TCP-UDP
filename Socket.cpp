@@ -46,23 +46,19 @@ void Socket::Connect()
     }
 }
 
-void Socket::Accept()
+int Socket::Accept()
 {
     struct sockaddr_in temp_addr;
     memset(&temp_addr,0,sizeof(temp_addr));
     socklen_t len;
     return_fd=accept(socket_fd,(struct sockaddr *)(&temp_addr),&len);
-    if(return_fd<0)
-    {
-        printf("accept failed\n");
-        return;
-    }
+    return return_fd;
 }
 
-int Socket::Read(void * buf, int len)
+int Socket::Read(int fd,void * buf, int len)
 {
-    //printf("waiting read sockfd: %d\n",socket_fd);
-    return read(socket_fd,buf,len);
+    printf("waiting read sockfd: %d\n",fd);
+    return read(fd,buf,len);
 }
 //ssize_t nr = ::recvfrom(sock.fd(), &message, sizeof message, 0, &peerAddr, &addrLen);
 int Socket::Recvfrom(void * buf, int len,struct sockaddr_in & peerAddr)
@@ -73,10 +69,10 @@ int Socket::Recvfrom(void * buf, int len,struct sockaddr_in & peerAddr)
     return recvfrom(socket_fd,buf,len,0,(struct sockaddr *)&peerAddr,&addrLen);
 }
 
-int Socket::Write(const void * buf,int len)
+int Socket::Write(int fd,const void * buf,int len)
 {
-    //printf("writing sockfd: %d\n",socket_fd);
-    return write(socket_fd,buf,len);
+    printf("writing sockfd: %d\n",fd);
+    return write(fd,buf,len);
 }
 //sendto(sock.fd(), &message, sizeof message, 0, &peerAddr, addrLen);
 int Socket::Sendto(const void * buf,int len,struct sockaddr_in & addr)
