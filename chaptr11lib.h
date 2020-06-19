@@ -15,6 +15,7 @@
 class helpNet
 {
     public:
+        //int Tcp_connect(char const * host, char const * serv);
         int Tcp_connect(const char * host, const char * serv);
         int Tcp_listen(const char * host, const char * serv);
         int Udp_connect(const char * host, const char * serv,struct sockaddr * * resa, socklen_t * len);

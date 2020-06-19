@@ -16,28 +16,40 @@ read、write
 //#include <sys/types.h> 
 #include <signal.h> //for 信号相关的函数
 #include <sys/wait.h>//for watipid
+#include <netdb.h>
+#include <sys/ioctl.h>
+#include <sys/un.h>//for struct sockaddr_un
+#include <fcntl.h>//for fcntl
+#include <errno.h>//for errno
 
 typedef void Sigfunc(int);
 
 class Socket
 {
     public:
-        Socket(bool flag,int port);//flag为true表示使用TCP，否则使用UDP；
+        Socket(bool flag,int port);//flag为true表示使用TCP，否则使用UDP，sin_addr.s_addr初始化为INADDR_ANY
+        Socket(bool flag,int port, struct in_addr * ptr);//指定sin_addr.s_addr初始化为ptr
+        Socket(bool flag,char * sun_path);//负责为Unix域进行初始化,flag为true表示使用字节流，为false使用数据报
         ~Socket()
         {
             close(socket_fd);
             close(return_fd);   
         }
         void Bind();
+        void BindUnix();
         void Listen();
-        void Connect();
+        int Connect();
+        int ConnectUnix();
         int Read(int fd,void * buf,int len);
         //ssize_t nr = ::recvfrom(sock.fd(), &message, sizeof message, 0, &peerAddr, &addrLen);
         int Recvfrom(void * buf,int len,struct sockaddr_in & peerAddr);
+        int Recvfrom(void * buf,int len,struct sockaddr_un & peerAddr);
         //sendto(sock.fd(), &message, sizeof message, 0, &peerAddr, addrLen);
         int Sendto(const void * buf, int len,struct sockaddr_in & addr);
+        int Sendto(const void * buf, int len,struct sockaddr_un & addr);
         int Write(int fd,const void * buf,int len);
         int Accept();
+        int AcceptUnix();
         void Setsockopt();
         int get_return_fd()
         {
@@ -51,7 +63,12 @@ class Socket
         {
             return addr;
         }
+        struct sockaddr_un get_addr1()
+        {
+            return addr1;
+        }
     private:
         int socket_fd,return_fd;
         struct sockaddr_in addr;
+        struct sockaddr_un addr1;
 };
