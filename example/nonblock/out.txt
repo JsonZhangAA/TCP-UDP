@@ -1,0 +1,30 @@
+nfiles = 1
+read 100 bytes of home page
+read 100 bytes of home page
+read 100 bytes of home page
+read 5 bytes of home page
+end-of-file on home page
+start_connect for www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000, fd 4
+connection established for www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+wrote 71 bytes for www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 100 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+read 43 bytes from www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
+end-of-file on www.zwfw.hubei.gov.cn/s/index.html?areaId=420984000000
