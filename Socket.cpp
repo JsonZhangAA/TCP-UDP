@@ -51,7 +51,7 @@ void Socket::BindUnix()
 void Socket::realBind()
 {   
     printf("socket_fd: %d\n",socket_fd);
-    if(inOrun)
+    if(inOrUn)
     {
         if(bind(socket_fd,(struct sockaddr *)(&addr),sizeof(addr)))
         {
@@ -192,7 +192,7 @@ int Socket::Sendto(const void * buf,int len,struct sockaddr_un & addr)
 int Socket::realSendto(const void * buf,int len,struct sockaddr * addr)
 {
     socklen_t addrLen = sizeof(addr);
-    return sendto(socket_fd, buf, len,0,addr,addrLen)
+    return sendto(socket_fd, buf, len,0,addr,addrLen);
 }
 
 void Socket::Setsockopt()

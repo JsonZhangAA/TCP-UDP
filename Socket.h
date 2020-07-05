@@ -38,7 +38,7 @@ class Socket
         }
         void Bind();
         void BindUnix();
-        void readBind();
+        void realBind();
         void Listen();
         int Connect();
         int ConnectUnix();
